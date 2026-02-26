@@ -4,5 +4,6 @@ public class City {
         
         FoodTruck FoodT = new FoodTruck();
         System.out.println(FoodT);
+        
     }
 }

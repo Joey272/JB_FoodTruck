@@ -8,6 +8,9 @@ public class FoodTruck {
         System.out.println("here is your food "+"("+order+")");
         scan.close();
     }
+    public void stock(){
+
+    }
     public static void main(String[] args) {
         
     }
