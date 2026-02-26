@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 public class FoodTruck {
     public FoodTruck(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("what do you want to order");
-        String order = scan.nextLine();
-        System.out.println("here is your food "+"("+order+")");
-        scan.close();
     }
+    
+    public String[] order(Scanner scan){
+            System.out.println("what is the first thing you would like to order?");
+            String item = scan.nextLine();
+            String[] tab = {};
+            return tab;
+        }
     public void stock(){
 
     }
