@@ -1,15 +1,26 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FoodTruck {
     public FoodTruck(){
     }
-    
-    public String[] order(Scanner scan){
-            System.out.println("what is the first thing you would like to order?");
-            String item = scan.nextLine();
-            String[] tab = {};
-            return tab;
+    private ArrayList<String> tab = new ArrayList();
+    public void order(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("what would you like to order?");
+        String item = scan.nextLine();
+        
+        tab.add(item);
+        System.out.println("anything else? Yes or no");
+        String shouldContinue = scan.nextLine();
+        if (shouldContinue.equalsIgnoreCase("yes")){
+            order();
         }
+        else{
+            System.out.println("your order: "+tab);
+        }
+
+    }
     public void stock(){
 
     }
