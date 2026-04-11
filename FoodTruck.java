@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FoodTruck {
+
     public FoodTruck(){
     }
     private ArrayList<String> tab = new ArrayList();
@@ -24,7 +25,14 @@ public class FoodTruck {
         supply.put("ice cream", 10);
         return supply;
     }
+    public static HashMap<String, Integer> updateStock(String item, int newQuantity){
+        supply.put(item, newQuantity);
+        return supply;
+    }
+    //bug here; doesn't update supply vals
     public void order(){
+        MenuL();
+        stock();
         Scanner scan = new Scanner(System.in);
         // ArrayList<String> tab = new ArrayList<>();
         double total = 0;
@@ -34,13 +42,14 @@ public class FoodTruck {
             for (Map.Entry<String, Double> entry : menu.entrySet()) {
                 String key = entry.getKey();
                 double val = entry.getValue();
-                System.out.println(key+": "+val);
+                System.out.println(key+": $"+val);
                 
             }
             System.out.println("what would you like to order?");
             String item = scan.nextLine();
             if (menu.containsKey(item)){
                 tab.add(item);
+                updateStock(item, 9);
                 order();
             }
             else{
@@ -54,6 +63,7 @@ public class FoodTruck {
         if ((shouldContinue.length())>0&&!shouldContinue.contains("no")){
             if (menu.containsKey(shouldContinue)){
                 tab.add(shouldContinue);
+                updateStock(shouldContinue, supply.get(shouldContinue)-1);
                 order();
             }
             else{
@@ -72,6 +82,7 @@ public class FoodTruck {
             System.out.println(total);
             tab.clear();
         }
+        System.out.println(supply);
 
     }
     public static void main(String[] args) {
