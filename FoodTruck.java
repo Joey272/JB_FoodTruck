@@ -7,9 +7,11 @@ public class FoodTruck {
 
     public FoodTruck(){
     }
+    private String temS;
+    private int tempI;
     private ArrayList<String> tab = new ArrayList();
     static HashMap<String, Double> menu = new HashMap<>();
-    static HashMap<String,Integer> supply = new HashMap<>();
+    HashMap<String,Integer> supply = new HashMap<>();
     public static HashMap<String, Double> MenuL(){
         // HashMap<String, Double> menu = new HashMap<>();
         menu.put("burger", 2.5);
@@ -18,15 +20,19 @@ public class FoodTruck {
         menu.put("ice cream", 1.25);
         return menu;
     }
-    public static HashMap<String, Integer> stock(){
+    public HashMap<String, Integer> stock(){
         supply.put("burger", 10);
         supply.put("fries", 10);
         supply.put("pepsi", 10);
         supply.put("ice cream", 10);
         return supply;
-    }
-    public static HashMap<String, Integer> updateStock(String item, int newQuantity){
-        supply.put(item, newQuantity);
+    }//make with constructor
+    public HashMap<String, Integer> updateStock(String item){
+        int x= supply.get(item);
+        System.out.println(x);
+        supply.remove(item);
+        supply.put(item, x-2);
+        System.out.println(item+" , "+x);
         return supply;
     }
     //bug here; doesn't update supply vals
@@ -49,7 +55,7 @@ public class FoodTruck {
             String item = scan.nextLine();
             if (menu.containsKey(item)){
                 tab.add(item);
-                updateStock(item, 9);
+                updateStock(item);
                 order();
             }
             else{
@@ -63,7 +69,7 @@ public class FoodTruck {
         if ((shouldContinue.length())>0&&!shouldContinue.contains("no")){
             if (menu.containsKey(shouldContinue)){
                 tab.add(shouldContinue);
-                updateStock(shouldContinue, supply.get(shouldContinue)-1);
+                updateStock(shouldContinue);
                 order();
             }
             else{
@@ -81,8 +87,8 @@ public class FoodTruck {
             }
             System.out.println(total);
             tab.clear();
+            System.out.println(supply);
         }
-        System.out.println(supply);
 
     }
     public static void main(String[] args) {
