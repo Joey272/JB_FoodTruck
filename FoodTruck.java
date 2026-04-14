@@ -6,12 +6,43 @@ import java.util.Scanner;
 public class FoodTruck {
 
     public FoodTruck(){
+        supply.put("burger", 10);
+        supply.put("fries", 10);
+        supply.put("pepsi", 10);
+        supply.put("ice cream", 10);
+        item.put("burger", 1);
+        item.put("fries", 2);
+        item.put("pepsi", 3);
+        item.put("ice cream", 1);
+    }
+    public FoodTruck(int StockAll){
+        supply.put("burger", StockAll);
+        supply.put("fries", StockAll);
+        supply.put("pepsi", StockAll);
+        supply.put("ice cream", StockAll);
+        item.put("burger", 1);
+        item.put("fries", 2);
+        item.put("pepsi", 3);
+        item.put("ice cream", 1);
+    }
+    public FoodTruck(int StockF,int StockB,int StockIC,int StockP){
+        supply.put("burger", StockB);
+        supply.put("fries", StockF);
+        supply.put("pepsi", StockP);
+        supply.put("ice cream", StockIC);
+        item.put("burger", 1);
+        item.put("fries", 2);
+        item.put("pepsi", 3);
+        item.put("ice cream", 1);
     }
     private String temS;
     private int tempI;
     private ArrayList<String> tab = new ArrayList();
     static HashMap<String, Double> menu = new HashMap<>();
-    HashMap<String,Integer> supply = new HashMap<>();
+    static HashMap<String, Integer> item = new HashMap<>();
+    Map<String,Integer> supply = new HashMap<>();
+
+
     public static HashMap<String, Double> MenuL(){
         // HashMap<String, Double> menu = new HashMap<>();
         menu.put("burger", 2.5);
@@ -20,25 +51,24 @@ public class FoodTruck {
         menu.put("ice cream", 1.25);
         return menu;
     }
-    public HashMap<String, Integer> stock(){
-        supply.put("burger", 10);
-        supply.put("fries", 10);
-        supply.put("pepsi", 10);
-        supply.put("ice cream", 10);
-        return supply;
-    }//make with constructor
-    public HashMap<String, Integer> updateStock(String item){
+    public Map<String, Integer> updateStock(String item){
         int x= supply.get(item);
         System.out.println(x);
         supply.remove(item);
-        supply.put(item, x-2);
+        supply.put(item, x-1);
         System.out.println(item+" , "+x);
         return supply;
     }
-    //bug here; doesn't update supply vals
+    //bug here; doesn't update supply vals --Fixed
+    // public static void itemNum(){
+    //     // HashMap<String, Double> menu = new HashMap<>();
+    //     item.put("burger", 1);
+    //     item.put("fries", 2);
+    //     item.put("pepsi", 3);
+    //     item.put("ice cream", 1);
+    // }
     public void order(){
         MenuL();
-        stock();
         Scanner scan = new Scanner(System.in);
         // ArrayList<String> tab = new ArrayList<>();
         double total = 0;
@@ -90,6 +120,30 @@ public class FoodTruck {
             System.out.println(supply);
         }
 
+    }
+    public void aiOrder(){
+        int chance = (int)(Math.random()*item.size());
+        int orderSize = (int)(Math.random()*5);
+        if(chance==0){
+            chance++;
+        }
+        if(orderSize==0){
+            orderSize++;
+        }
+        String order= "";
+        System.out.println(chance);
+        //int fromMenu = item.get
+        for (int i = 0; i < orderSize; i++) {
+            for (Map.Entry<String,Integer> ent:item.entrySet()) {
+                if(ent.getValue()==chance){
+                    order = ent.getKey();
+
+                }
+        }
+        }
+        System.out.println(order);
+        System.out.println(orderSize);
+        //System.out.println(item.size());
     }
     public static void main(String[] args) {
         
