@@ -41,6 +41,7 @@ public class FoodTruck {
     static HashMap<String, Double> menu = new HashMap<>();
     static HashMap<String, Integer> item = new HashMap<>();
     Map<String,Integer> supply = new HashMap<>();
+    private double profit;
 
 
     public static HashMap<String, Double> MenuL(){
@@ -114,10 +115,12 @@ public class FoodTruck {
             System.out.println("Amount due: ");
             for (String elem : tab) {
                 total += menu.get(elem);
+                calcProfit(elem);
             }
             System.out.println(total);
             tab.clear();
             System.out.println(supply);
+            System.out.println(profit);
         }
 
     }
@@ -144,6 +147,10 @@ public class FoodTruck {
         System.out.println(order);
         System.out.println(orderSize);
         //System.out.println(item.size());
+    }
+    public void calcProfit(String itemSold){
+        double profitFormula =menu.get(itemSold)*0.25;
+        profit+=profitFormula;
     }
     public static void main(String[] args) {
         
